@@ -51,7 +51,7 @@ exports.template = function(grunt, init, done) {
 
         // Generate package.json file, used by npm and grunt.
         init.writePackageJSON('package.json', {
-            name: 'HTML5 based templates.',
+            name: 'HTML5-based-templates.',
             version: '0.0.0-ignored',
             npm_test: 'grunt test',
             node_version: '>= 0.8.0',
