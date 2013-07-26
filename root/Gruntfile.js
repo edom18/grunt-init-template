@@ -31,6 +31,17 @@ module.exports = function(grunt) {
             }
         },
 
+        //HTML template using ejs.
+        ejs: {
+            all: {
+                options: grunt.file.readJSON('html-config.json'),
+                src: ['_src/ejs/*.ejs', '!_src/ejs/partials/*'],
+                dest: './',
+                expand: true,
+                ext: '.html'
+             }
+         },
+
         //js compile
         'grunt-unite-js' : {
             dev: {
@@ -119,6 +130,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-unite-js');
     grunt.loadNpmTasks('grunt-growl');
+    grunt.loadNpmTasks('grunt-ejs');
 
     grunt.registerTask('default', ['grunt-unite-js:dev', 'compass:dev', 'uglify:dev', 'growl:dev']);
     grunt.registerTask('js', ['grunt-unite-js:dev', 'growl:dev']);

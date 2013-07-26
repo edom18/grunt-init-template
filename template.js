@@ -50,26 +50,26 @@ exports.template = function(grunt, init, done) {
         init.copyAndProcess(files, props, {noProcess: '**/lib/**'});
 
         // Generate package.json file, used by npm and grunt.
-        init.writePackageJSON('package.json', {
-            name: 'HTML5-based-templates.',
-            version: '0.0.0-ignored',
-            npm_test: 'grunt test',
-            node_version: '>= 0.8.0',
-            devDependencies: {
-                "grunt": "~0.4.0",
-                "grunt-contrib-uglify": "~0.2.0",
-                "grunt-contrib-jshint": "~0.3.0",
-                "grunt-contrib-coffee": "~0.7.0",
-                "grunt-contrib-compass": "~0.1.3",
-                "grunt-contrib-watch": "~0.3.1",
-                "grunt-contrib-clean": "~0.4.1",
-                "grunt-contrib-concat": "~0.1.3",
-                "grunt-contrib-copy": "~0.4.1"
-            },
-            engines: {
-                'node': '>=0.8.0'
-            }
-        });
+        //init.writePackageJSON('package.json', {
+        //    name: 'HTML5-based-templates.',
+        //    version: '0.0.0-ignored',
+        //    npm_test: 'grunt test',
+        //    node_version: '>= 0.8.0',
+        //    devDependencies: {
+        //        "grunt": "~0.4.0",
+        //        "grunt-contrib-uglify": "~0.2.0",
+        //        "grunt-contrib-jshint": "~0.3.0",
+        //        "grunt-contrib-coffee": "~0.7.0",
+        //        "grunt-contrib-compass": "~0.1.3",
+        //        "grunt-contrib-watch": "~0.3.1",
+        //        "grunt-contrib-clean": "~0.4.1",
+        //        "grunt-contrib-concat": "~0.1.3",
+        //        "grunt-contrib-copy": "~0.4.1"
+        //    },
+        //    engines: {
+        //        'node': '>=0.8.0'
+        //    }
+        //});
 
         // All done!
         done();

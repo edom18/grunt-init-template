@@ -1,0 +1,30 @@
+{
+    "files": [
+        {
+            "grunt": {
+                "taskID": "import JS files task",
+                "target": "index.html",
+                "output": "app.js",
+                "scriptDirectory": "./"
+            },
+            "html": {
+                "include": "app.min.js"
+            },
+            "script": [
+
+                { "dev" : "js/debug-mode.js" },
+
+                "js/lib/util.js",
+                "js/lib/polyfill.js",
+                "js/lib/Class.js",
+                "js/lib/Disposable.js",
+                "js/lib/EventDispatcher.js",
+                "js/lib/Component.js",
+                "js/lib/Model.js",
+                "js/lib/View.js",
+
+                { "app" : "" }
+            ]
+        }
+    ]
+}
