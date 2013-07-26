@@ -1,6 +1,38 @@
-(function (win, doc, Class, exports) {
+(function (win, doc, Class, Disposable, ns) {
 
-    var EventDispatcher = Class.extend({
+    /**
+     * An Event object.
+     * This class contains some object.
+     * @constructor
+     */
+    var EventObject = Class.extend({
+        init: function (context, args, opt) {
+            var stopPropagation = this.stopPropagation;
+            var preventDefault  = this.preventDefault;
+            util.copyClone(this, context, args, opt);
+            this._context = context;
+            this.stopPropagation = stopPropagation;
+            this.preventDefault = preventDefault;
+        },
+        stopPropagation: function () {
+            if (this._context.stopPropagation) {
+                this._context.stopPropagation();
+            }
+            this._context._bubbleCanceled = true;
+        },
+        preventDefault: function () {
+            if (this._context.preventDefault) {
+                this._context.preventDefault();
+            }
+        }
+    });
+
+
+    /**
+     * This class gives a simple event dispatch system.
+     * @constructor
+     */
+    var EventDispatcher = Disposable.extend({
 
         /**
          *  @param {string}   typ
@@ -12,23 +44,23 @@
             if (!typ) {
                 throw "INVALID EVENT TYPE " + typ;
             }
-            
+
             var obj = this.handlers || (this.handlers = {}),
                 arr = [].concat(obj[typ] || []), //Use copy
-                evt = opt_evt || {},
+                evt = new EventObject(this, opt_evt, {
+                    type: typ
+                }),
                 len, i, fnc;
-                
-            evt.type || (evt.type = typ);
             
             // handle specified event type
             for (i = 0, len = arr.length; i < len; ++i) {
-                (fnc = arr[i][0]) && fnc.call(arr[i][1] || this, this, evt);
+                (fnc = arr[i][0]) && fnc.call(arr[i][1] || this, evt);
             }
             
             // handle wildcard "*" event
             arr  = obj["*"] || [];
             for (i = 0, len = arr.length; i < len; ++i) {
-                (fnc = arr[i][0]) && fnc.call(arr[i][1] || this, this, evt);
+                (fnc = arr[i][0]) && fnc.call(arr[i][1] || this, evt);
             }
         },
 
@@ -54,13 +86,23 @@
          *  @param {function(evt:object):void} fnc
          */
         off: function (typ, fnc) {
+
+            this.handlers || (this.handlers = {});
+
             if (!typ) {
-                throw "off:INVALID EVENT TYPE " + typ + " " + fn;
+                this.handlers = {};
+                return;
+            }
+
+            if (!fnc) {
+                this.handlers[typ] = [];
+                return;
             }
             
-            var obj = this.handlers || (this.handlers = {}),
+            var obj = this.handlers,
                 arr = obj[typ] || [],
                 i = arr.length;
+
                 
             while(i) {
                 arr[--i][0] === fnc && arr.splice(i, 1);
@@ -78,9 +120,33 @@
             }
 
             this.on(typ, _fnc, context);
+        },
+
+        dispose: function () {
+            this._super();
+            this.off();
+            this.handlers = null;
         }
     });
 
-    exports.EventDispatcher = EventDispatcher;
+    EventDispatcher.getEventListeners = function (target, typ) {
+        var handlers = target.handlers;
 
-}(window, window.document, window.Class, window));
+        if (!handlers) {
+            return null;
+        }
+        if (typ) {
+            return handlers[typ];
+        }
+        
+        return handlers;
+    };
+
+    /*! ---------------------------------------------------------
+        EXPORTS
+    ------------------------------------------------------------- */
+
+    ns.EventDispatcher = EventDispatcher;
+    ns.EventObject     = EventObject;
+
+}(window, window.document, window.Class, window.Disposable, window));
