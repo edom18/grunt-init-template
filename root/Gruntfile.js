@@ -34,7 +34,8 @@ module.exports = function(grunt) {
         //HTML template using ejs.
         ejs: {
             dev: {
-                template: ['_src/ejs/*.ejs'],
+                templateRoot: '_src/ejs',
+                template: ['*.ejs'],
                 dest: './',
                 options: ['_src/options.dev.yaml', {env: 'dev'}]
             }
@@ -62,6 +63,13 @@ module.exports = function(grunt) {
             css : {
                 files : '_src/scss/*.scss',
                 tasks : ['compass:dev', 'growl:dev']
+            },
+            html: {
+                files: [
+                    '_src/ejs/*.ejs',
+                    '_src/ejs/**/*.ejs'
+                ],
+                tasks: ['ejs:dev', 'growl:dev']
             },
             template: {
                 files : './_src/template/*.html',
