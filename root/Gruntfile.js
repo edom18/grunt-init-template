@@ -31,6 +31,15 @@ module.exports = function(grunt) {
             }
         },
 
+        concat: {
+            dist: {
+                src: [
+                    "js/hoge.js"
+                ],
+                dest: "js/app.js"
+            }
+        },
+
         //HTML template using ejs.
         ejs: {
             dev: {
