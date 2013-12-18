@@ -7,7 +7,7 @@ var OUTPUT_JS   = 'app.js';
 var TARGET_HTML = 'index.html'; //Gruntfile.js からみた対象HTMLのパス
 var SCSS_DIR    = '_src/scss'; //Gruntfile.js からみたSCSSディレクトリ
 var CSS_OUTPUT  = 'css';  //Gruntfile.js からみた出力ディレクトリ
-var IMG_DIR     = 'img';
+var IMAGES_DIR  = 'img';
 
 //------------------------------------------------------------------------------
 //  Grunt config
@@ -92,13 +92,15 @@ module.exports = function(grunt) {
                 options: {
                     sassDir: SCSS_DIR,
                     cssDir: CSS_OUTPUT,
+                    imagesDir: IMAGES_DIR,
                     environment: 'production'
                 }
             },
             dev: {
                 options: {
                     sassDir: SCSS_DIR,
-                    cssDir: CSS_OUTPUT
+                    cssDir: CSS_OUTPUT,
+                    imagesDir: IMAGES_DIR
                 }
             }
         },
