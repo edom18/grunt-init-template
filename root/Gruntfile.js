@@ -90,6 +90,8 @@ module.exports = function(grunt) {
         compass: {
             app: {
                 options: {
+                    relativeAssets: true,
+                    assetCacheBuster: false,
                     sassDir: SCSS_DIR,
                     cssDir: CSS_OUTPUT,
                     imagesDir: IMAGES_DIR,
@@ -98,6 +100,8 @@ module.exports = function(grunt) {
             },
             dev: {
                 options: {
+                    relativeAssets: true,
+                    assetCacheBuster: false,
                     sassDir: SCSS_DIR,
                     cssDir: CSS_OUTPUT,
                     imagesDir: IMAGES_DIR
