@@ -34,9 +34,9 @@ module.exports = function(grunt) {
         concat: {
             dist: {
                 src: [
-                    "js/hoge.js"
+                    'js/*.js'
                 ],
-                dest: "js/app.js"
+                dest: "app.js"
             }
         },
 
@@ -126,7 +126,7 @@ module.exports = function(grunt) {
                     }
                 },
                 src : OUTPUT_JS,
-                dest: 'app.min.js'//OUTPUT_JS
+                dest: 'app.min.js'
             },
             app: {
                 options: {
@@ -139,8 +139,11 @@ module.exports = function(grunt) {
                     }
                 },
                 src : OUTPUT_JS,
-                dest: 'app.min.js'//OUTPUT_JS
+                dest: 'app.min.js'
             }
+        },
+        usemin: {
+            html: ["index.html"]
         }
     });
 
@@ -149,11 +152,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-usemin');
     grunt.loadNpmTasks('grunt-unite-js');
     grunt.loadNpmTasks('grunt-growl');
     grunt.loadNpmTasks('grunt-simple-ejs');
 
-    grunt.registerTask('default', ['grunt-unite-js:dev', 'compass:dev', 'uglify:dev', 'growl:dev']);
-    grunt.registerTask('js', ['grunt-unite-js:dev', 'growl:dev']);
-    grunt.registerTask('build', ['grunt-unite-js:app', 'compass:app', 'uglify:app', 'growl:app']);
+    grunt.registerTask('build', ['ejs:dev', 'usemin', 'compass:app', 'concat', 'uglify:app', 'growl:app']);
+    grunt.registerTask('default', ['compass:dev', 'concat', 'uglify:dev', 'growl:app']);
 };
