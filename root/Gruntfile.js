@@ -90,6 +90,7 @@ module.exports = function(grunt) {
         compass: {
             app: {
                 options: {
+                    noLineComments: true,
                     relativeAssets: true,
                     assetCacheBuster: false,
                     sassDir: SCSS_DIR,
@@ -100,6 +101,7 @@ module.exports = function(grunt) {
             },
             dev: {
                 options: {
+                    noLineComments: true,
                     relativeAssets: true,
                     assetCacheBuster: false,
                     sassDir: SCSS_DIR,
@@ -158,5 +160,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-simple-ejs');
 
     grunt.registerTask('build', ['ejs:dev', 'usemin', 'compass:app', 'concat', 'uglify:app', 'growl:app']);
-    grunt.registerTask('default', ['compass:dev', 'concat', 'uglify:dev', 'growl:app']);
+    grunt.registerTask('default', ['ejs:dev', 'compass:dev', 'concat', 'uglify:dev', 'growl:app']);
 };
