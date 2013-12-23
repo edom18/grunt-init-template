@@ -17,7 +17,7 @@
 
     "grunt-simple-ejs": "*",
     "grunt-growl": "*",
-    "grunt-unite-js": "git://github.com/nenjiru/grunt-unite-js.git"
+    "grunt-usemin": "*"
   },
   "scripts": {
     "test": "mocha"
