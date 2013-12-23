@@ -1,7 +1,6 @@
 //------------------------------------------------------------------------------
 //  Settings
 //------------------------------------------------------------------------------
-var IMPORT_FILE = 'import.json';
 var OUTPUT_JS   = 'app.js';
 
 var TARGET_HTML = 'index.html'; //Gruntfile.js からみた対象HTMLのパス
@@ -13,8 +12,6 @@ var IMAGES_DIR  = 'img';
 //  Grunt config
 //------------------------------------------------------------------------------
 module.exports = function(grunt) {
-
-    var setting = grunt.file.readJSON(IMPORT_FILE);
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -47,16 +44,6 @@ module.exports = function(grunt) {
                 template: ['*.ejs'],
                 dest: './',
                 options: ['_src/options.dev.yaml', {env: 'dev'}]
-            }
-        },
-
-        //js compile
-        'grunt-unite-js' : {
-            dev: {
-                config : setting
-            },
-            app: {
-                config : setting
             }
         },
 
