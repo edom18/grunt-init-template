@@ -47,14 +47,6 @@ module.exports = function(grunt) {
             }
         },
 
-        //Unite Template
-        'unite-template': {
-            dest: {
-                src: './_src/template/*.html',
-                target: TARGET_HTML
-            }
-        },
-
         watch: {
             css : {
                 files : '_src/scss/*.scss',
@@ -66,10 +58,6 @@ module.exports = function(grunt) {
                     '_src/ejs/**/*.ejs'
                 ],
                 tasks: ['ejs:dev', 'growl:dev']
-            },
-            template: {
-                files : './_src/template/*.html',
-                tasks : ['unite-template', 'growl:dev']
             }
         },
 
@@ -142,7 +130,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-usemin');
-    grunt.loadNpmTasks('grunt-unite-js');
     grunt.loadNpmTasks('grunt-growl');
     grunt.loadNpmTasks('grunt-simple-ejs');
 
